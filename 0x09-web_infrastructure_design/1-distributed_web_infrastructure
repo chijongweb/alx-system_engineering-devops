@@ -1,1 +1,87 @@
+Infrastructure Components and Their Purpose:
 
+Load Balancer (HAProxy)
+
+Why it’s added: It distributes incoming traffic across multiple servers to improve availability and performance.
+
+Distribution algorithm: Round Robin (or Least Connections, depending on configuration).
+
+Round Robin distributes requests evenly across servers in sequence.
+
+Least Connections sends new requests to the server with the fewest current connections.
+
+Setup type: Can be configured as Active-Active (both servers handle traffic simultaneously) or Active-Passive (one is on standby).
+
+Active-Active: Better performance, load is shared.
+
+Active-Passive: Backup only kicks in if the primary fails, offering redundancy but not scalability.
+
+Role: Acts as the entry point for user requests and routes them to available backend servers.
+
+Web Server (Nginx)
+
+Installed on Server 1.
+
+Why it’s added: Handles static content (HTML, CSS, JS) and reverse-proxies dynamic requests to the application server.
+
+Role: First point of processing after load balancer; optimizes performance and handles caching.
+
+Application Server
+
+Installed on Server 2.
+
+Why it’s added: Runs dynamic backend logic (PHP, Python, Node.js, etc.) and interacts with the database.
+
+Role: Processes user requests, executes business logic, and sends responses.
+
+Application Files (Code Base)
+
+Shared between the web and application server (via shared storage or sync mechanism).
+
+Why it’s added: Contains site logic and templates.
+
+Role: Provides the core functionality of the site.
+
+Database (MySQL)
+
+Installed on Server 3.
+
+Why it’s added: Stores and retrieves persistent data like user accounts, posts, transactions, etc.
+
+Setup: Can be configured with Primary-Replica (Master-Slave) model for redundancy and performance.
+
+Primary Node: Accepts both read and write operations.
+
+Replica Node: Only accepts read operations. Used to offload read queries and ensure failover availability.
+
+Role: Centralized data management.
+
+How a Primary-Replica Database Cluster Works:
+
+The primary (master) node handles all writes and propagates data changes to replica(s).
+
+Replicas synchronize data from the primary and serve read-only queries.
+
+This setup improves performance and enables read scalability.
+
+In case of failure, a replica can be promoted to primary (with manual or automated intervention).
+
+Issues in This Infrastructure:
+
+Single Points of Failure (SPOF):
+
+Load balancer, database primary node, or any individual server can still be a SPOF unless redundancy is added (e.g., a second load balancer or DB failover).
+
+Security Issues:
+
+No firewalls configured to filter traffic.
+
+No HTTPS/SSL used to encrypt user data.
+
+Systems are exposed to potential attacks (e.g., SQL injection, DDoS).
+
+No Monitoring:
+
+Without monitoring tools (like Prometheus, Grafana, or external services), failures or performance issues may go undetected.
+
+No alerting or visibility into system health or request throughput.
