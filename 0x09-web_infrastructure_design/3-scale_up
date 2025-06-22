@@ -1,1 +1,45 @@
+1. HAProxy Load Balancers (2 total - Cluster)
+LB1 (Active) and LB2 (Backup) for High Availability.
+
+Configured in active-passive failover mode.
+
+Distributes incoming traffic across web servers.
+
+If LB1 fails, LB2 takes over automatically.
+
+ Why add a second Load Balancer?
+To eliminate a single point of failure. In production, load balancers are critical and must be redundant.
+
+2. Web Servers (3 Total)
+Serve static content (HTML, CSS, JS, images).
+
+Forward dynamic requests (like PHP, Python) to the application servers.
+
+Why separate web servers?
+To offload simple tasks from the application server, reducing processing overhead and increasing performance.
+
+3. Application Servers
+Process dynamic business logic, API calls, sessions, etc.
+
+Language runtimes (Node.js, Python, Java, etc.) run here.
+
+ Why separate application servers?
+To scale independently, isolate failures, and allocate better resources to compute-intensive tasks.
+
+4. Database Server (MySQL)
+Stores user data, configurations, logs, etc.
+
+Centralized in this setup (still a SPOF, unless we implement replication).
+
+ Why not combine DB with app?
+Splitting the database improves performance, security, and scalability. Each layer (web/app/db) can scale as needed.
+
+5. Additional Server (Web Server 3)
+Added as part of scaling.
+
+Increases capacity and allows horizontal scaling of the frontend layer.
+
+ Why add a server?
+To distribute traffic more evenly, reduce latency, and handle more concurrent users.
+
 
