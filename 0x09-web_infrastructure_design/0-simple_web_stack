@@ -1,1 +1,74 @@
-0-simple_web_stack
+Task 0: Simple Web Stack – Web Infrastructure Design
+
+1. Domain Name Resolution (DNS)
+When a user enters www.foobar.com into their browser, the Domain Name System (DNS) is queried to translate the domain name into an IP address.
+
+The "www" part is a subdomain (or hostname).
+
+The DNS record used is an A record, which maps www.foobar.com to the IP address 8.8.8.8.
+
+2. Connecting to the Server
+Once the DNS resolution is complete, the browser now knows the IP address of the server. It sends an HTTP request like this:
+
+vbnet
+Copy
+Edit
+GET / HTTP/1.1  
+Host: www.foobar.com  
+This request is transmitted over the internet using TCP/IP protocols.
+
+Inside the Server (IP: 8.8.8.8)
+
+What is a Server?
+A server is a physical or virtual machine that provides services to other machines over a network. In this context, it hosts the website, handles requests, and stores data.
+
+Main Components and Their Roles:
+
+Nginx (Web Server):
+
+Listens on ports 80 (HTTP) and 443 (HTTPS).
+
+Accepts incoming connections from users.
+
+Serves static content like HTML, CSS, JavaScript, and images.
+
+Forwards dynamic requests to the application server using reverse proxy.
+
+Acts as the first point of contact for user requests.
+
+Application Server:
+
+Processes dynamic content.
+
+Executes backend logic written in a language like PHP, Python (with Gunicorn), or Node.js.
+
+Responds with generated HTML based on logic or database queries.
+
+Application Files (Code Base):
+
+Contains the backend logic, templates, routes, and functionality of the website.
+
+Typically stored in a directory like /var/www/foobar.com.
+
+MySQL (Database):
+
+Stores persistent structured data like user accounts, product listings, posts, etc.
+
+The application server communicates with it over localhost (usually on port 3306 or via a Unix socket).
+
+Communication Protocol:
+
+The entire interaction between the server and the client browser happens over the HTTP or HTTPS protocol, running on top of TCP/IP.
+
+Problems with This Infrastructure
+
+Single Point of Failure (SPOF):
+If the single server crashes (due to hardware failure or system error), the entire website becomes unavailable.
+
+Downtime During Maintenance:
+Restarting the server or deploying new code often requires restarting Nginx or the application server, which leads to temporary downtime where users cannot access the site.
+
+No Scalability:
+One server can only handle a limited amount of traffic. If traffic increases significantly, the server may become slow or crash due to overload.
+There is no mechanism for load balancing or horizontal scaling.
+
