@@ -1,1 +1,77 @@
+🔐 SECURITY COMPONENTS
+1. Firewalls (3)
+Firewall 1: At network edge to filter incoming/outgoing traffic to the Load Balancer.
 
+Firewall 2: On each web/app server to enforce host-based security rules.
+
+Firewall 3: Protects database server, only allows traffic from trusted app servers.
+
+📌 Why add firewalls?
+To prevent unauthorized access, mitigate attacks, and enforce network segmentation.
+
+2. SSL Certificate
+Installed at the Load Balancer to encrypt communication over HTTPS.
+
+Ensures confidentiality and integrity between clients and the site www.foobar.com.
+
+📌 Why HTTPS?
+
+Protects user data (e.g., passwords, payments).
+
+Prevents MITM (Man-In-The-Middle) attacks.
+
+Improves trust and SEO ranking.
+
+📊 MONITORING COMPONENTS
+3. Monitoring Clients (3 total)
+Installed on each Web/App Server.
+
+Example: Sumologic, Prometheus, or Datadog agents.
+
+📌 Why monitor?
+
+To track performance, detect failures early, ensure uptime, and optimize resource usage.
+
+How is data collected?
+Monitoring agents run on each server.
+
+They collect metrics such as CPU usage, disk I/O, request rate, error logs.
+
+Send data to a centralized monitoring platform.
+
+🧮 To monitor QPS (Queries Per Second):
+Enable logging on your web server or reverse proxy (e.g., Nginx).
+
+Use monitoring tools to parse logs or use built-in metrics (e.g., Nginx stub status or Prometheus exporter).
+
+Set alerts for abnormal QPS spikes.
+
+⚠️ INFRASTRUCTURE ISSUES
+1. SSL Termination at Load Balancer (Problem)
+Issue: Unencrypted traffic from Load Balancer to app servers.
+
+Risk: Internal attackers or compromised network nodes could intercept data.
+
+Fix: Use end-to-end encryption (re-encrypt HTTPS between LB and app servers).
+
+2. Single MySQL Server for Writes (Problem)
+Issue: Creates a single point of failure.
+
+Risk: If the DB crashes, the entire app becomes non-functional.
+
+Fix: Use Master-Slave replication or MySQL Cluster with automatic failover.
+
+3. All Servers Have All Components (Problem)
+Issue: Tight coupling of services (web, app, DB) makes scaling and debugging hard.
+
+Risk: Resource contention and complex maintenance.
+
+Fix: Use separation of concerns:
+
+Web Server
+
+App Server
+
+DB Server
+
+Consider containers or microservices for scalability.
