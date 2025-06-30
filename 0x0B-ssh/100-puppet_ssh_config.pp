@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# This Puppet script configures the SSH client to use a specific private key and disable password authentication
+
 file { '/home/vagrant/.ssh/config':
   ensure => 'file',
   owner  => 'vagrant',
