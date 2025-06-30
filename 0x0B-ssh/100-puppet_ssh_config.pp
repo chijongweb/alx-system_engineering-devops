@@ -1,11 +1,21 @@
+#!/usr/bin/env bash
+file { '/home/vagrant/.ssh/config':
+  ensure => 'file',
+  owner  => 'vagrant',
+  group  => 'vagrant',
+  mode   => '0600',
+}
+
 file_line { 'Declare identity file':
-  path  => '/etc/ssh/ssh_config',
-  line  => '    IdentityFile ~/.ssh/school',
-  match => '^ *IdentityFile',
+  path  => '/home/vagrant/.ssh/config',
+  line  => '  IdentityFile ~/.ssh/school',
+  match => '^\\s*IdentityFile',
+  require => File['/home/vagrant/.ssh/config'],
 }
 
 file_line { 'Turn off passwd auth':
-  path  => '/etc/ssh/ssh_config',
-  line  => '    PasswordAuthentication no',
-  match => '^ *PasswordAuthentication',
+  path  => '/home/vagrant/.ssh/config',
+  line  => '  PasswordAuthentication no',
+  match => '^\\s*PasswordAuthentication',
+  require => File['/home/vagrant/.ssh/config'],
 }
