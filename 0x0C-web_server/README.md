@@ -38,3 +38,19 @@ By the end of this project, I should be able to explain the following:
   ```bash
   #!/usr/bin/env bash
   # Script to [describe what the script does]
+
+  # 0x0C. Web server
+
+## Task 1: Install nginx web server
+
+### Description
+
+Web servers are software that generate and serve HTML pages to clients. In this task, we will install and configure the **nginx** web server on an Ubuntu machine.
+
+---
+
+### Requirements
+
+- Install `nginx` on the `web-01` server.
+- Nginx must listen on port **80** (default).
+- When making a GET request to the root URL (`/`) of the server using `curl`, it should return a page containing the string:
