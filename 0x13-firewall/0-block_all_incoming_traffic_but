@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Set up UFW firewall to allow only SSH, HTTP, and HTTPS
 
 sudo apt update
