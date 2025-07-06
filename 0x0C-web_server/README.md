@@ -123,3 +123,26 @@ Content-Length: 178
 Connection: keep-alive
 Location: https://www.youtube.com/watch?v=QH2-TGUlwu4
 
+## Task 4: Custom 404 Page
+
+### Description
+
+This task involves configuring the Nginx web server to serve a **custom 404 error page** whenever a client requests a non-existent page.
+
+The custom page must display the exact message:  
+**"Ceci n'est pas une page"**
+
+---
+
+### Requirements
+
+- Install Nginx on a fresh Ubuntu 16.04 server
+- Create a custom HTML file that contains the string `Ceci n'est pas une page`
+- Configure Nginx to return that page when a 404 error occurs
+- The HTTP response must be `404 Not Found`
+- Reload Nginx using `service` (not `systemctl`)
+
+---
+
+### Expected Output
+
