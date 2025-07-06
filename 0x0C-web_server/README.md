@@ -113,3 +113,13 @@ This type of redirection is typically used when content has been moved to a new 
 ---
 
 ### Example Output
+
+byron@byron-Lenovo-ideapad-320-15ISK:/$ curl -sI http://127.0.0.1/redirect_me
+HTTP/1.1 301 Moved Permanently
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 06 Jul 2025 09:33:22 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Location: https://www.youtube.com/watch?v=QH2-TGUlwu4
+
