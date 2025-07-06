@@ -190,3 +190,19 @@ Ceci n'est pas une page
 byron@byron-Lenovo-ideapad-320-15ISK:/$ 
 
 
+## Task 5: Install Nginx Web Server with Puppet
+
+### Description
+
+This task involves automating the installation and configuration of the Nginx web server using Puppet. The configuration must serve a static page with "Hello World!" and implement a 301 redirect from `/redirect_me`.
+
+### Features
+
+- Nginx installed and running on port 80
+- Root page (`/`) serves "Hello World!"
+- `/redirect_me` performs a 301 redirect to YouTube
+
+### Usage
+
+```bash
+sudo puppet apply 7-puppet_install_nginx_web_server.pp
