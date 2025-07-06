@@ -123,7 +123,7 @@ Content-Length: 178
 Connection: keep-alive
 Location: https://www.youtube.com/watch?v=QH2-TGUlwu4
 
-## Task 4: Custom 404 Page
+# Task 4: Custom 404 Page
 
 ### Description
 
@@ -136,13 +136,43 @@ The custom page must display the exact message:
 
 ### Requirements
 
-- Install Nginx on a fresh Ubuntu 16.04 server
-- Create a custom HTML file that contains the string `Ceci n'est pas une page`
-- Configure Nginx to return that page when a 404 error occurs
-- The HTTP response must be `404 Not Found`
-- Reload Nginx using `service` (not `systemctl`)
+- Install Nginx on a fresh Ubuntu 16.04 server.
+- Create a custom HTML file named `custom_404.html` inside `/var/www/html/`.
+- The file must contain the string `Ceci n'est pas une page`.
+- Configure Nginx to return that page with a `404 Not Found` status code for any invalid URL.
+- Reload Nginx using `service` (not `systemctl`).
+- Use a Bash script named `4-not_found_page_404` to automate the entire configuration.
 
 ---
+
+### Nginx Configuration Snippet
+
+The following block was added to `/etc/nginx/sites-available/default` inside the `server` block:
+
+```nginx
+error_page 404 /custom_404.html;
+
+location = /custom_404.html {
+    root /var/www/html;
+    internal;
+}
+
+#!/usr/bin/env bash
+# Script to install nginx and configure a custom 404 page with the string "Ceci n'est pas une page"
+
+apt-get update -y
+apt-get install nginx -y
+
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+
+sed -i '/server_name _;/a \
+\terror_page 404 /custom_404.html;\n\
+\tlocation = /custom_404.html {\n\
+\t\troot /var/www/html;\n\
+\t\tinternal;\n\
+\t}' /etc/nginx/sites-available/default
+
+service nginx reload
 
 ### Expected Output
 
