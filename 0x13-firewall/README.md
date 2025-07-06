@@ -47,3 +47,48 @@ By configuring a firewall, we protect the system from unwanted network access an
 ```bash
 chmod +x 0-block_all_incoming_traffic_but
 ./0-block_all_incoming_traffic_but
+
+# 0x13. Firewall
+
+## Description
+
+This project is focused on securing Ubuntu servers using the `ufw` (Uncomplicated Firewall). It demonstrates how to set up a basic firewall configuration, allow essential services, and implement port forwarding.
+
+By configuring firewalls on web servers, we aim to limit unnecessary access while enabling legitimate traffic for services such as SSH, HTTP, and HTTPS.
+
+---
+
+## Files
+
+### `0-block_all_incoming_traffic_but`
+- Bash script or set of UFW commands that:
+  - Installs `ufw` if not already installed.
+  - Configures it to allow only ports:
+    - `22` (SSH)
+    - `80` (HTTP)
+    - `443` (HTTPS)
+  - Denies all other incoming traffic.
+
+### `100-port_forwarding`
+- Contains modified `/etc/ufw/before.rules` showing how port forwarding was configured.
+- Forwards traffic from `port 8080` to `port 80`, so that web traffic sent to 8080 is served by Nginx (which listens on port 80 only).
+
+---
+
+## Usage
+
+To test firewall behavior:
+- Use `telnet` or `curl` to test open ports (e.g., `telnet <ip> 22` or `curl -sI <ip>:8080`)
+- You should only see successful responses on allowed ports.
+
+---
+
+## Learning Objectives
+
+- Understand the purpose and function of firewalls
+- Use `ufw` to manage firewall rules
+- Safely configure port forwarding on Ubuntu using `ufw` and `iptables`
+
+---
+
+
