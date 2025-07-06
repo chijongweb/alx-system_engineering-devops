@@ -86,3 +86,30 @@ Date: Tue, 21 Feb 2017 23:43:22 GMT
 Content-Type: text/html
 Content-Length: 30
 Connection: keep-alive
+
+## Task 3: Redirection
+
+### Description
+
+In this task, the goal is to configure the Nginx server so that when a client requests the `/redirect_me` path, they are **redirected permanently (HTTP 301)** to another URL.
+
+This type of redirection is typically used when content has been moved to a new location and you want users and search engines to be aware of the change.
+
+---
+
+### Requirements
+
+- Configure a **301 redirect** from `/redirect_me` to `https://www.youtube.com/watch?v=QH2-TGUlwu4`.
+- Use a Bash script (`3-redirection`) to:
+  - Install and start Nginx (if not already done).
+  - Modify the Nginx default configuration using `sed` or manual file edit.
+  - Add a `location` block that handles the redirection.
+  - Restart or reload Nginx using the `service` command (do **not** use `systemctl`).
+- The script must be:
+  - Executable.
+  - Compliant with Shellcheck (version 0.3.7).
+  - Written with a proper shebang and a brief comment explaining the script.
+
+---
+
+### Example Output
