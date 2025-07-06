@@ -27,3 +27,34 @@ X-Served-By: 1302035-web-01
 
 $ curl -sI http://<web-02-public-IP> | grep X-Served-By
 X-Served-By: 1302035-web-02
+
+# 0x0F. Load Balancer
+
+## Description
+
+This project is part of the ALX System Engineering & DevOps curriculum. It focuses on setting up a load-balanced web infrastructure using HAProxy to distribute HTTP requests across multiple web servers (Nginx).
+
+By the end of this project, the infrastructure will:
+- Have two web servers behind a load balancer
+- Handle more traffic (scalability)
+- Be more reliable (redundancy/failover)
+- Use custom HTTP headers to identify which server handled the request
+
+---
+
+## Tasks
+
+### 0. Custom HTTP Response Header
+
+- Configured Nginx on both `web-01` and `web-02`
+- Added a custom HTTP header: `X-Served-By: <hostname>`
+- Wrote a script `0-custom_http_response_header` to automate this setup
+
+#### Example:
+
+```bash
+curl -sI http://<web-01-public-IP> | grep X-Served-By
+# Output: X-Served-By: 1302035-web-01
+
+curl -sI http://<web-02-public-IP> | grep X-Served-By
+# Output: X-Served-By: 1302035-web-02
