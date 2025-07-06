@@ -87,6 +87,31 @@ Content-Type: text/html
 Content-Length: 30
 Connection: keep-alive
 
+## 2-setup_a_domain_name
+
+### Objective
+Set up a custom domain name and configure its DNS A record to point to the `web-01` server's public IP address.
+
+### Steps Taken
+
+1. **Domain Registration**  
+   Registered a domain with a registrar. Verified that the registrar is `Dotserve Inc` using the [WHOIS lookup tool](https://whois.whoisxmlapi.com/).
+
+2. **DNS Configuration**  
+   Added an A record in the DNS settings:
+   - **Type**: A  
+   - **Name**: `@` (represents the root domain)  
+   - **Value**: `
+   - **TTL**: Default (e.g., 3600 seconds)
+
+3. **DNS Propagation**  
+   Waited for the DNS changes to propagate (up to 1–2 hours).
+
+4. **Verification**  
+   Verified that the domain resolved to the correct IP using the `dig` command:
+   ```bash
+   dig chijongweb.tech
+
 ## Task 3: Redirection
 
 ### Description
