@@ -146,3 +146,17 @@ The custom page must display the exact message:
 
 ### Expected Output
 
+byron@byron-Lenovo-ideapad-320-15ISK:/$ curl -sI http://127.0.0.1/nonexistentpage
+HTTP/1.1 404 Not Found
+Server: nginx/1.24.0 (Ubuntu)
+Date: Sun, 06 Jul 2025 10:26:57 GMT
+Content-Type: text/html
+Content-Length: 24
+Connection: keep-alive
+ETag: "686a4e4b-18"
+
+byron@byron-Lenovo-ideapad-320-15ISK:/$ curl http://127.0.0.1/nonexistentpage
+Ceci n'est pas une page
+byron@byron-Lenovo-ideapad-320-15ISK:/$ 
+
+
