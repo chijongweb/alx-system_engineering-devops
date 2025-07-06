@@ -76,10 +76,10 @@ Hello World!
 
 From a local machine:
 
-byron@byron-Lenovo-ideapad-320-15ISK:~$  curl <196.41.10.94>/
+byron@byron-Lenovo-ideapad-320-15ISK:~$  curl 127.0.0.1/
 Hello World!
 
-byron@byron-Lenovo-ideapad-320-15ISK:~$  curl -sI <196.41.10.94>/
+byron@byron-Lenovo-ideapad-320-15ISK:~$  curl -sI 127.0.0.1/
 HTTP/1.1 200 OK
 Server: nginx/1.4.6 (Ubuntu)
 Date: Tue, 21 Feb 2017 23:43:22 GMT
