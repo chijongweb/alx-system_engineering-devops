@@ -69,7 +69,6 @@ The setup must be automated by a Bash script named `1-install_nginx_web_server`
 
 On the server:
 
-```bash
 byron@byron-Lenovo-ideapad-320-15ISK:~$ ./1-install_nginx_web_server > /dev/null 2>&1
 byron@byron-Lenovo-ideapad-320-15ISK:~$  curl localhost
 Hello World!
@@ -174,7 +173,7 @@ The custom page must display the exact message:
 
 The following block was added to `/etc/nginx/sites-available/default` inside the `server` block:
 
-```nginx
+
 error_page 404 /custom_404.html;
 
 location = /custom_404.html {
