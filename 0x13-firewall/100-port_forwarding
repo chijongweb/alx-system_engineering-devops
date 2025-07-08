@@ -1,23 +1,15 @@
-# /etc/ufw/before.rules
+#!/bin/bash
+# This script sets up port forwarding from port 8080 to port 80 using UFW (iptables)
 
-# rules.before
-#
-# Rules that should be run before ufw command line added rules. Custom
-# rules should be added to one of these chains:
-#   ufw-before-input
-#   ufw-before-output
-#   ufw-before-forward
-
+# Ensure the port forwarding rule exists in /etc/ufw/before.rules
+if ! grep -q "REDIRECT --to-port 80" /etc/ufw/before.rules; then
+  sudo sed -i '/^# START PORT FORWARDING RULE/,$d' /etc/ufw/before.rules
+  sudo tee -a /etc/ufw/before.rules > /dev/null <<EOF
 # START PORT FORWARDING RULE
 *nat
 :PREROUTING ACCEPT [0:0]
 -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
 COMMIT
 # END PORT FORWARDING RULE
-
-# Don't delete these required lines
-*filter
-:ufw-before-input - [0:0]
-:ufw-before-output - [0:0]
-:ufw-before-forward - [0:0]
-...
+EOF
+fi
