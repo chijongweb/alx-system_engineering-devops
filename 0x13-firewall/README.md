@@ -52,43 +52,35 @@ chmod +x 0-block_all_incoming_traffic_but
 
 ## Description
 
-This project is focused on securing Ubuntu servers using the `ufw` (Uncomplicated Firewall). It demonstrates how to set up a basic firewall configuration, allow essential services, and implement port forwarding.
-
-By configuring firewalls on web servers, we aim to limit unnecessary access while enabling legitimate traffic for services such as SSH, HTTP, and HTTPS.
-
----
-
-## Files
-
-### `0-block_all_incoming_traffic_but`
-- Bash script or set of UFW commands that:
-  - Installs `ufw` if not already installed.
-  - Configures it to allow only ports:
-    - `22` (SSH)
-    - `80` (HTTP)
-    - `443` (HTTPS)
-  - Denies all other incoming traffic.
-
-### `100-port_forwarding`
-- Contains modified `/etc/ufw/before.rules` showing how port forwarding was configured.
-- Forwards traffic from `port 8080` to `port 80`, so that web traffic sent to 8080 is served by Nginx (which listens on port 80 only).
-
----
-
-## Usage
-
-To test firewall behavior:
-- Use `telnet` or `curl` to test open ports (e.g., `telnet <ip> 22` or `curl -sI <ip>:8080`)
-- You should only see successful responses on allowed ports.
-
----
+This project is part of the ALX System Engineering & DevOps curriculum. It focuses on the basics and advanced configuration of firewalls using `ufw` (Uncomplicated Firewall) on Ubuntu servers.
 
 ## Learning Objectives
 
-- Understand the purpose and function of firewalls
-- Use `ufw` to manage firewall rules
-- Safely configure port forwarding on Ubuntu using `ufw` and `iptables`
+- What a firewall is and how it works
+- The two main types of firewalls (network-based and host-based)
+- How to configure a firewall using `ufw`
+- How to allow and deny traffic to specific ports
+- How to implement port forwarding using `iptables` through `ufw`
 
----
+## Tasks
 
+### 0. Firewall ABC
+- Answered theoretical questions about firewall basics.
 
+### 1. Block all incoming traffic but
+- Configured `ufw` to block all incoming traffic by default and allow:
+  - Port 22 (SSH)
+  - Port 443 (HTTPS)
+  - Port 80 (HTTP)
+
+### 2. Port forwarding
+- Used `iptables` via `/etc/ufw/before.rules` to forward all incoming TCP traffic from port 8080 to port 80.
+- Verified redirection using `curl`.
+
+## How to Use
+
+To replicate port forwarding:
+
+1. Edit the UFW rules file:
+   ```bash
+   sudo nano /etc/ufw/before.rules
