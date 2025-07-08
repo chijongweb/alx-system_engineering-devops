@@ -1,9 +1,8 @@
 #!/bin/bash
-# This script sets up port forwarding from port 8080 to port 80 using UFW (iptables)
+# Sets up port forwarding from port 8080 to port 80 using UFW (iptables)
 
-# Ensure the port forwarding rule exists in /etc/ufw/before.rules
+# Append NAT rule if not already present
 if ! grep -q "REDIRECT --to-port 80" /etc/ufw/before.rules; then
-  sudo sed -i '/^# START PORT FORWARDING RULE/,$d' /etc/ufw/before.rules
   sudo tee -a /etc/ufw/before.rules > /dev/null <<EOF
 # START PORT FORWARDING RULE
 *nat
@@ -13,3 +12,6 @@ COMMIT
 # END PORT FORWARDING RULE
 EOF
 fi
+
+# Reload UFW to apply the changes
+sudo ufw reload
