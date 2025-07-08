@@ -12,5 +12,10 @@ SERVER_IP=$2
 USERNAME=$3
 SSH_KEY=$4
 
+# Perform the file transfer
+if ! scp -i "$SSH_KEY" -o StrictHostKeyChecking=no "$FILE" "$USERNAME@$SERVER_IP:~/"; then
+  echo "File transfer failed"
+  exit 1
+fi
 
-scp -i "$SSH_KEY" -o StrictHostKeyChecking=no "$FILE" "$USERNAME@$SERVER_IP:~/"
+exit 0
