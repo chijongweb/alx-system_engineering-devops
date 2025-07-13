@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Script to audit DNS records for given domain and subdomains
+
+# Function to perform DNS lookup and display results
+get_record_info() {
+    local full_domain=$1
+    record_info=$(dig "$full_domain" | awk '/^;; ANSWER SECTION:/{getline; print}')
+    record_type=$(echo "$record_info" | awk '{print $3}')
+    destination=$(echo "$record_info" | awk '{print $5}')
+    echo "The subdomain ${full_domain%%.*} is a $record_type record and points to $destination"
+}
+
+# Main logic
+domain=$1
+subdomain=$2
+
+if [ -z "$subdomain" ]; then
+    for sub in www lb-01 web-01 web-02; do
+        get_record_info "$sub.$domain"
+    done
+else
+    get_record_info "$subdomain.$domain"
+fi
